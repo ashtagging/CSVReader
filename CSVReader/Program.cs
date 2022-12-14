@@ -1,20 +1,29 @@
 ﻿using CsvHelper;
 using System.Globalization;
-using CSVReader;
 
-void PrintLines()
+using (var streamReader = new StreamReader(@"C:\Users\alittlewood\Documents\FileSystem\PG_M_20221211.csv"))
 {
-    using (var streamReader = new StreamReader(@"C:\Users\alittlewood\Documents\FileSystem\PG_M_20221211.csv"))
+    using(var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
     {
-        string line;
-        while ((line = streamReader.ReadLine()) != null)
-        {
-            Console.WriteLine(line);
-        }
+        var records = csvReader.GetRecords<dynamic>().ToList();
+        Console.WriteLine(records.Count); 
     }
 }
 
-PrintLines();
+public class MorrisonsData
+{
+    public string RetailerName { get; set; }
+    public int StoreCode { get; set; }
+    public string StoreName { get; set; }
+    public DateTime Date { get; set; }
+    public int SKU { get; set; }
+    public string ProductDescription { get; set; }
+    public int SalesVolume { get; set; }
+    public double SalesValue { get; set; }
+    public int StoreStockVolume { get; set; }
+    public int StoreStocked { get; set; }
+    public int StoreRanged { get; set; }
+}
 
 Console.ReadLine();
 

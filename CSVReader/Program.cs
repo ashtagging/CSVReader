@@ -16,9 +16,8 @@ using (var streamReader = new StreamReader(csvPath))
 
 Console.ReadLine();
 
-
 /// <summary>
-///  change all to strings and see which ones are a problem (get it working with strings first)
+///  change all to strings and see which ones are a problem (get it working with strings first) (dynamic vs MorrisonsData class)
 /// </summary>
 
 public class MorrisonsData

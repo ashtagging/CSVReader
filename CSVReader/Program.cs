@@ -55,13 +55,29 @@ string newDirectory = @"C:\Users\alittlewood\Documents\FileSystem\SubFolder3";
 // Creates the Specified Directory if one doesn't exist
 // Directory.CreateDirectory(newDirectory);
 
-//Creates Copies of teh files in one Directory and adds them to another Directory 
+///// Copying Files /////
+
+// Creates Copies of the files in one Directory and adds them to another Directory 
 string[] fileSelect = Directory.GetFiles(rootPath);
 string destinationFolder = @"C:\Users\alittlewood\Documents\FileSystem\SubFolder3";
 
-foreach (string file in fileSelect)
-{
-    File.Copy(file,@$"{destinationFolder}\{Path.GetFileName(file)}");
-}
+//foreach (string file in fileSelect)
+//{
+//    // the true at the end allows for overites if the file name already exists 
+//    File.Copy(file, @$"{destinationFolder}\{Path.GetFileName(file)}", true);
+//}
+
+//Copying from One Location to another and remanming the file (Be careful using this with file extensions 
+//for(int i = 0; i<files.Length; i++)
+//{
+//    File.Copy(files[i], @$"{destinationFolder}\{i}.txt", true);
+//}
+
+///// Moving Files /////
+
+//foreach (string file in fileSelect)
+//{
+//    File.Move(file, @$"{destinationFolder}\{Path.GetFileName(file)}");
+//}
 
 Console.ReadLine();

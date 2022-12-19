@@ -9,6 +9,13 @@
             DirectoryInfo[] cDirs = new DirectoryInfo(@"c:\").GetDirectories();
 
             string filePath = @"C:\Users\alittlewood\Documents\FileSystem\CDriveDirs.txt";
+            string csvFilePath = @"C:\Users\alittlewood\Documents\FileSystem\CDriveDirs.csv";        
+
+            //If the file already exists, delete the file
+            if (File.Exists(csvFilePath))
+            {
+                File.Delete(csvFilePath);
+            }
 
             // Write each directory name to a file.
             using (StreamWriter sw = new StreamWriter(filePath))
@@ -19,7 +26,7 @@
                 }
             }
 
-            // Read and show each line from the file in the Console
+            // Read and show each line from the new file in the Console
             string line = "";
             using (StreamReader sr = new StreamReader(filePath))
             {

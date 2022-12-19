@@ -5,17 +5,87 @@ using CsvHelper.Configuration.Attributes;
 using System.IO;
 
 string csvPath = @"C:\Users\alittlewood\Documents\FileSystem\PG_M_20221211.csv";
+List<string> lines = new List<string>();
 
-using (var streamReader = new StreamReader(csvPath))
+try
 {
-    using(var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+    if (File.Exists(csvPath))
     {
-        var records = csvReader.GetRecords<MorrisonsData>().ToList();
-        Console.WriteLine(records.Count);
+        using (StreamReader sr = new StreamReader(csvPath))
+        {
+            string line;
+            while ((line = sr.ReadLine()) != null)
+            {
+                String[] split = line.Split(",");
+
+                if (string.IsNullOrEmpty(split[6]))
+                {
+                    split[6] = "0";
+                    line = String.Join(",", split);
+                }
+                if (string.IsNullOrEmpty(split[7]))
+                {
+                    split[7] = "0";
+                    line = String.Join(",", split);
+                }
+                if (string.IsNullOrEmpty(split[8]))
+                {
+                    split[8] = "0";
+                    line = String.Join(",", split);
+                }
+                if (split[9] == "0")
+                {
+                    split[9] = "FALSE";
+                    line = String.Join(",", split);
+                }
+                if (split[9] == "1")
+                {
+                    split[9] = "TRUE";
+                    line = String.Join(",", split);
+                }
+                if (split[10] == "0")
+                {
+                    split[10] = "FALSE";
+                    line = String.Join(",", split);
+                }
+                if (split[10] == "1")
+                {
+                    split[10] = "TRUE";
+                    line = String.Join(",", split);
+                }
+                lines.Add(line);
+            }
+        }
+
+        using (StreamWriter sw = new StreamWriter(csvPath, false))
+        {
+            foreach (String line in lines)
+            {
+                sw.WriteLine(line);
+            }       
+        }
     }
+    Console.WriteLine("Script Successful");
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Error with Request");
+    Console.WriteLine(ex.Message);
 }
 
-Console.ReadLine();
+
+//Console.ReadLine();
+
+
+
+//using (var streamReader = new StreamReader(csvPath))
+//{
+//    using (var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
+//    {
+//        var records = csvReader.GetRecords<MorrisonsData>().ToList();
+//        Console.WriteLine(records.Count);
+//    }
+//}
 
 // Need to add line to change blanks to 0 so that it can be added to the correct data type,
 // or make string and then add fucntionality for if string "" => change to string "0" then ToINT

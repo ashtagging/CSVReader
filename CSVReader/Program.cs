@@ -2,6 +2,7 @@
 using System.Globalization;
 using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
+using System.IO;
 
 string csvPath = @"C:\Users\alittlewood\Documents\FileSystem\PG_M_20221211.csv";
 
@@ -10,7 +11,7 @@ using (var streamReader = new StreamReader(csvPath))
     using(var csvReader = new CsvReader(streamReader, CultureInfo.InvariantCulture))
     {
         var records = csvReader.GetRecords<MorrisonsData>().ToList();
-        Console.WriteLine(records.Count); 
+        Console.WriteLine(records.Count);
     }
 }
 
@@ -37,10 +38,10 @@ public class MorrisonsData
     public int SKU { get; set; }
     [Name("S_PRODUCT_DESCRIPTION")]
     public string ProductDescription { get; set; }
-    [Name("R_SALES_VOLUME")]
-    public int SalesVolume { get; set; }
-    [Name("R_SALES_VALUE")]
-    public double SalesValue { get; set; }
+    //[Name("R_SALES_VOLUME")]
+    //public int SalesVolume { get; set; }
+    //[Name("R_SALES_VALUE")]
+    //public double SalesValue { get; set; }
     //[Name("R_STORE_STOCK_VOLUME")]
     //public int StoreStockVolume { get; set; }
     //[Name("R_STORE_STOCKED")]
@@ -60,10 +61,10 @@ public class MorrisonsData
     //public string SKU { get; set; }
     //[Name("S_PRODUCT_DESCRIPTION")]
     //public string ProductDescription { get; set; }
-    //[Name("R_SALES_VOLUME")]
-    //public string SalesVolume { get; set; }
-    //[Name("R_SALES_VALUE")]
-    //public string SalesValue { get; set; }
+    [Name("R_SALES_VOLUME")]
+    public string SalesVolume { get; set; }
+    [Name("R_SALES_VALUE")]
+    public string SalesValue { get; set; }
     [Name("R_STORE_STOCK_VOLUME")]
     public string StoreStockVolume { get; set; }
     [Name("R_STORE_STOCKED")]

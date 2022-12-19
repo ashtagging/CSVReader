@@ -3,15 +3,27 @@ using System.Globalization;
 using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 
-string csvPath = @"C:\Users\alittlewood\Documents\FileSystem\PG_M_20221211.csv";
+string inputFilePath = @"C:\Users\alittlewood\Documents\FileSystem\PG_M_20221211.csv";
+string outputPath = @"C:\Users\alittlewood\Documents\FileSystem\output.csv";
 List<string> lines = new List<string>();
+List<string> header = new List<string>();
+
+//Read in header check if the header compare header array with file and use that index position from header array instead of assuming column header position.
+//Doesn't take into account double quotes -  look at textfieldParser
+//string.Format
 
 try
 {
-    if (File.Exists(csvPath))
+    if (File.Exists(inputFilePath))
     {
-        using (StreamReader sr = new StreamReader(csvPath))
+        using (StreamReader sr = new StreamReader(inputFilePath))
         {
+            if (header.Count() == 0)
+            {
+                string headerLine = sr.ReadLine();
+                header = headerLine.Split(',').ToList();            
+            }
+
             string line;
             while ((line = sr.ReadLine()) != null)
             {
@@ -47,10 +59,10 @@ try
                 }
                 line = String.Join(",", split);
                 lines.Add(line);
-            }
+            }        
         }
 
-        using (StreamWriter sw = new StreamWriter(csvPath, false))
+        using (StreamWriter sw = new StreamWriter(outputPath, false))
         {
             foreach (String line in lines)
             {

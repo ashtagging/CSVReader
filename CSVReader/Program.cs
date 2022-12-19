@@ -2,7 +2,6 @@
 using System.Globalization;
 using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
-using System.IO;
 
 string csvPath = @"C:\Users\alittlewood\Documents\FileSystem\PG_M_20221211.csv";
 List<string> lines = new List<string>();
@@ -21,38 +20,32 @@ try
                 if (string.IsNullOrEmpty(split[6]))
                 {
                     split[6] = "0";
-                    line = String.Join(",", split);
                 }
                 if (string.IsNullOrEmpty(split[7]))
                 {
                     split[7] = "0";
-                    line = String.Join(",", split);
                 }
                 if (string.IsNullOrEmpty(split[8]))
                 {
                     split[8] = "0";
-                    line = String.Join(",", split);
                 }
                 if (split[9] == "0")
                 {
                     split[9] = "FALSE";
-                    line = String.Join(",", split);
                 }
                 if (split[9] == "1")
                 {
                     split[9] = "TRUE";
-                    line = String.Join(",", split);
                 }
                 if (split[10] == "0")
                 {
-                    split[10] = "FALSE";
-                    line = String.Join(",", split);
+                    split[10] = "FALSE";                  
                 }
                 if (split[10] == "1")
                 {
-                    split[10] = "TRUE";
-                    line = String.Join(",", split);
+                    split[10] = "TRUE";                  
                 }
+                line = String.Join(",", split);
                 lines.Add(line);
             }
         }
@@ -73,10 +66,7 @@ catch (Exception ex)
     Console.WriteLine(ex.Message);
 }
 
-
 //Console.ReadLine();
-
-
 
 //using (var streamReader = new StreamReader(csvPath))
 //{
